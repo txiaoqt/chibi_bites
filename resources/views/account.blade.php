@@ -32,6 +32,7 @@
                                     </span>
                                 </p>
                                 <p class="order-detail order-total"><strong>Total:</strong> ₱{{ number_format($order->total, 2) }}</p>
+                                <a href="{{ route('order.track', $order->id) }}" class="track-order-btn">Track Order</a>
                             </div>
                             <div class="order-items">
                                 <h5 class="items-title">Items Ordered:</h5>

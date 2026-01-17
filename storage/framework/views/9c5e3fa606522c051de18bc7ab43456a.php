@@ -1,66 +1,64 @@
-@extends('layouts.app')
-
-@section('content')
+<?php $__env->startSection('content'); ?>
 <section style="padding: 140px 20px; min-height: 80vh;">
     <div class="container">
         <h1 class="text-center mb-4">Your Cart</h1>
 
-@if(empty($cartItems))
+<?php if(empty($cartItems)): ?>
     <div class="empty-cart-message">
         <div class="empty-cart-icon">🛒</div>
         <h3 class="empty-cart-title">Your Cart is Empty</h3>
         <p class="empty-cart-text">Looks like you haven't added any delicious mochi to your cart yet!</p>
-        <a href="{{ route('shop') }}" class="empty-cart-btn">Start Shopping</a>
+        <a href="<?php echo e(route('shop')); ?>" class="empty-cart-btn">Start Shopping</a>
     </div>
-@else
+<?php else: ?>
     <!-- Separate update and remove forms (not nested in checkout form) -->
     <div class="cart-forms-container" style="display: none;">
-        @foreach($cartItems as $index => $item)
+        <?php $__currentLoopData = $cartItems; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $index => $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
             <!-- Individual update form for each item -->
-            <form action="{{ route('cart.update') }}" method="POST" class="update-form" id="update-form-{{ $index }}">
-                @csrf
-                <input type="hidden" name="product_id" value="{{ $item['product']->id }}">
-                <input type="hidden" name="quantity" id="quantity-{{ $index }}">
+            <form action="<?php echo e(route('cart.update')); ?>" method="POST" class="update-form" id="update-form-<?php echo e($index); ?>">
+                <?php echo csrf_field(); ?>
+                <input type="hidden" name="product_id" value="<?php echo e($item['product']->id); ?>">
+                <input type="hidden" name="quantity" id="quantity-<?php echo e($index); ?>">
             </form>
             <!-- Individual remove form for each item -->
-            <form action="{{ route('cart.remove', $item['product']->id) }}" method="POST" class="remove-form" id="remove-form-{{ $index }}">
-                @csrf
-                @method('DELETE')
+            <form action="<?php echo e(route('cart.remove', $item['product']->id)); ?>" method="POST" class="remove-form" id="remove-form-<?php echo e($index); ?>">
+                <?php echo csrf_field(); ?>
+                <?php echo method_field('DELETE'); ?>
             </form>
-        @endforeach
+        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
         <!-- Clear cart form -->
-        <form action="{{ route('cart.clear') }}" method="POST" class="clear-form" id="clear-form">
-            @csrf
+        <form action="<?php echo e(route('cart.clear')); ?>" method="POST" class="clear-form" id="clear-form">
+            <?php echo csrf_field(); ?>
         </form>
     </div>
 
     <!-- Checkout form (contains only checkout-related elements) -->
-    <form id="checkoutForm" action="{{ route('checkout.selected') }}" method="POST">
-        @csrf
+    <form id="checkoutForm" action="<?php echo e(route('checkout.selected')); ?>" method="POST">
+        <?php echo csrf_field(); ?>
         <div class="cart-container">
-            @foreach($cartItems as $index => $item)
-                <div class="cart-item" data-price="{{ $item['subtotal'] }}" data-product-id="{{ $item['product']->id }}">
+            <?php $__currentLoopData = $cartItems; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $index => $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                <div class="cart-item" data-price="<?php echo e($item['subtotal']); ?>" data-product-id="<?php echo e($item['product']->id); ?>">
                     <div class="cart-item-checkbox">
-                        <input type="checkbox" name="selected_items[]" value="{{ $item['product']->id }}" id="item_{{ $index }}">
-                        <label for="item_{{ $index }}"></label>
+                        <input type="checkbox" name="selected_items[]" value="<?php echo e($item['product']->id); ?>" id="item_<?php echo e($index); ?>">
+                        <label for="item_<?php echo e($index); ?>"></label>
                     </div>
-                    <img src="{{ asset($item['product']->image) }}" alt="{{ $item['product']->name }}">
+                    <img src="<?php echo e(asset($item['product']->image)); ?>" alt="<?php echo e($item['product']->name); ?>">
                     <div class="cart-item-details">
-                        <h3>{{ $item['product']->name }}</h3>
-                        <p>{{ $item['product']->description }}</p>
+                        <h3><?php echo e($item['product']->name); ?></h3>
+                        <p><?php echo e($item['product']->description); ?></p>
                         <div class="cart-item-controls">
                             <div class="quantity-controls">
-                                <button type="button" class="quantity-btn" onclick="decreaseQuantity({{ $index }})">−</button>
-                                <input type="number" value="{{ $item['quantity'] }}" min="1" class="quantity-input" id="quantity-input-{{ $index }}" onchange="updateQuantity({{ $index }})">
-                                <button type="button" class="quantity-btn" onclick="increaseQuantity({{ $index }})">+</button>
-                                <button type="button" class="update-btn" onclick="submitUpdate({{ $index }})">Update</button>
+                                <button type="button" class="quantity-btn" onclick="decreaseQuantity(<?php echo e($index); ?>)">−</button>
+                                <input type="number" value="<?php echo e($item['quantity']); ?>" min="1" class="quantity-input" id="quantity-input-<?php echo e($index); ?>" onchange="updateQuantity(<?php echo e($index); ?>)">
+                                <button type="button" class="quantity-btn" onclick="increaseQuantity(<?php echo e($index); ?>)">+</button>
+                                <button type="button" class="update-btn" onclick="submitUpdate(<?php echo e($index); ?>)">Update</button>
                             </div>
-                            <span class="price">₱{{ number_format($item['subtotal'], 2) }}</span>
-                            <button type="button" class="remove-btn" onclick="submitRemove({{ $index }})">Remove</button>
+                            <span class="price">₱<?php echo e(number_format($item['subtotal'], 2)); ?></span>
+                            <button type="button" class="remove-btn" onclick="submitRemove(<?php echo e($index); ?>)">Remove</button>
                         </div>
                     </div>
                 </div>
-            @endforeach
+            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
             <div class="cart-summary">
                 <h4>Order Summary</h4>
                 <p><strong>Total: ₱0.00</strong></p>
@@ -69,7 +67,7 @@
             </div>
         </div>
     </form>
-@endif
+<?php endif; ?>
     </div>
 </section>
 
@@ -173,4 +171,6 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 </script>
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.app', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH C:\Users\Christopher x Angel\Documents\chibi_bites\resources\views/cart.blade.php ENDPATH**/ ?>

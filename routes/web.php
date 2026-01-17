@@ -28,9 +28,13 @@ Route::middleware('auth')->group(function () {
 
     // Checkout and orders - Require authentication
     Route::get('/checkout', [OrderController::class, 'checkout'])->name('checkout');
+    Route::post('/checkout/selected', [OrderController::class, 'checkoutSelected'])->name('checkout.selected');
     Route::post('/orders', [OrderController::class, 'store'])->name('orders.store');
     Route::get('/order/confirmation/{id}', [OrderController::class, 'confirmation'])->name('order.confirmation');
+    Route::get('/order/track/{id}', [OrderController::class, 'track'])->name('order.track');
 });
+
+
 
 // Account
 Route::middleware('auth')->get('/account', [AccountController::class, 'index'])->name('account');
