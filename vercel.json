@@ -29,10 +29,10 @@
         "APP_KEY": "base64:ykyhN7YDZlQwC9K/UrvvlqgeSkxJ4ANAokjQFralNzk=",
 
         "DB_CONNECTION": "pgsql",
-        "DB_HOST": "db.ffbnkzlndqxjkjuoojni.supabase.co",
-        "DB_PORT": "5432",
+        "DB_HOST": "aws-1-ap-northeast-2.pooler.supabase.com",
+        "DB_PORT": "6543",
         "DB_DATABASE": "postgres",
-        "DB_USERNAME": "postgres",
+        "DB_USERNAME": "postgres.ffbnkzlndqxjkjuoojni",
         "DB_PASSWORD": "sigel%40nG02%40",
 
         "APP_CONFIG_CACHE": "/tmp/config.php",
