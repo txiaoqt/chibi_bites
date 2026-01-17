@@ -1814,189 +1814,58 @@ button:hover{
     RESPONSIVE DESIGN
 ==============================*/
 
-/* Mobile screens - make cards smaller for 2 cards per row */
+/* Force 2 columns on small screens for shop */
 @media (max-width: 767px) {
-  .product-card {
-    max-width: 160px;
-    min-height: 320px; /* Increased to allow growth */
-    padding: 10px;
+    /* 1. Create a gap between the two cards */
+    .product-column {
+        width: 50% !important;
+        flex: 0 0 50% !important;
+        max-width: 50% !important;
+        padding: 0 6px; /* Adds space between the left and right card */
+        margin-bottom: 15px; /* Adds space below the cards */
+    }
 
-    /* CRITICAL FIXES */
-    height: auto !important;      /* Forces the card to grow if content is long */
-    overflow: visible !important; /* Prevents cutting off the button */
-    justify-content: space-between; /* Ensures button sticks to bottom */
-  }
+    /* 2. Shrink the card container */
+    .product-card {
+        width: 100% !important;
+        padding: 8px !important; /* Reduce inner padding (was 15px) */
+        min-height: 260px; /* Make card shorter */
+        border-radius: 12px;
+    }
 
-  .product-column img {
-    max-width: 140px;
-    max-height: 120px;
-  }
+    /* 3. Make the Title much smaller */
+    .product-card h1 {
+        font-size: 14px !important; /* Down from 25px */
+        margin: 6px 0;
+        line-height: 1.2;
+    }
 
-  .product-card h1 {
-    font-size: 18px;
-    margin: 10px 0; /* Add margin to prevent text squishing */
-  }
+    /* 4. Resize the Image */
+    .product-card img {
+        max-height: 100px;
+        width: auto;
+        max-width: 100%;
+        margin-top: 5px;
+    }
 
-  .product-card .order-btn {
-    max-width: 140px;
-    font-size: 12px;
-    height: 32px;
-    padding: 4px;
-    margin-top: 10px; /* Ensure space above button */
-  }
+    /* 5. Resize Price Text */
+    .product-card p {
+        font-size: 13px;
+        margin: 5px 0;
+    }
 
-  /* Home page responsiveness */
-  .sectionshop {
-    margin-top: 100px;
-    padding: 0 20px;
-  }
-
-  .sectionshop h1 {
-    font-size: 35px;
-  }
-
-  /* 1. CRITICAL: Stop forcing sections to be full screen height */
-  .section {
-    height: auto !important; /* Let content define height */
-    min-height: auto !important;
-    padding: 50px 0; /* Add breathing room top/bottom */
-  }
-
-  /* 2. Fix the main container layout */
-  .center-div {
-    width: 90%;
-    height: auto; /* Remove fixed height */
-    flex-direction: column; /* Stack items vertically */
-    gap: 30px; /* Reduce gap between text and image */
-    margin: 0 auto;
-    padding: 0;
-  }
-
-  /* 3. Fix the inner boxes (Text and Images) */
-  .left-div, .right-div {
-    width: 100%;
-    height: auto; /* Remove fixed 400px height */
-    padding: 10px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  /* 4. Improve Typography */
-  .left-div h1 {
-    font-size: 32px;
-    margin-bottom: 15px;
-    text-align: center;
-  }
-
-  .left-div p {
-    font-size: 16px;
-    line-height: 1.6;
-    text-align: center; /* Center text looks better for this layout */
-    padding: 0 10px;
-  }
-
-  /* 5. Fix Image sizing */
-  .right-img {
-    width: 100%;
-    max-width: 350px; /* Prevent images from getting too huge */
-    height: auto;
-    border-radius: 15px; /* Adds a polished look */
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1); /* Subtle shadow for depth */
-  }
-
-  /* 6. Fix the Slider Sections (1 and 3) */
-  .section-1, .section-3 {
-    padding: 0 !important; /* Sliders usually look best touching edges */
-    height: 250px !important; /* fixed height for mobile banner */
-  }
-
-  .slider-wrapper {
-    height: 100%;
-  }
-
-  /* Contact page responsiveness */
-  .contact-container {
-    flex-direction: column; /* Stack boxes vertically */
-    padding: 100px 20px 40px 20px; /* Reduce side padding significantly */
-    gap: 40px; /* Reduce gap between the pink box and location section */
-    margin-top: 0;
-  }
-
-  /* Fix the Pink "Get in Touch" Box */
-  .contact-box {
-    width: 100%;
-    padding: 30px 20px; /* More comfortable padding */
-    text-align: center; /* Center align text for better balance */
-  }
-
-  .contact-box h2 {
-    font-size: 32px; /* Smaller title font */
-    margin-bottom: 15px;
-  }
-
-  /* CRITICAL: Remove the desktop margins that squish the text */
-  .contact-intro,
-  .contact-details,
-  .social-links {
-    margin-left: 0 !important; /* Resets the 75px margin */
-    text-align: center;
-    font-size: 16px; /* Readable mobile font size */
-  }
-
-  .social-item {
-    justify-content: center; /* Centers the social text */
-  }
-
-  /* Fix the "Visit Us" Location Section */
-  .location-box {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center; /* Center everything */
-    text-align: center;
-  }
-
-  .location-box h2 {
-    margin-top: 0; /* Remove huge top margin */
-    font-size: 32px;
-    margin-bottom: 15px;
-  }
-
-  .location-text,
-  .location-address {
-    font-size: 16px;
-    margin-left: 0 !important; /* Reset margin here too */
-    justify-content: center;
-  }
-
-  /* Resize the Map Image */
-  .map-container {
-    width: 100%;
-    height: auto; /* Allow height to adjust automatically */
-    margin-top: 20px;
-  }
-
-  .map-placeholder {
-    width: 100%;
-    max-width: 100%;
-    height: auto;
-    object-fit: contain; /* Ensures image doesn't get stretched */
-  }
-
-  /* Footer responsiveness */
-  .site-footer {
-    padding: 30px 20px;
-  }
-
-  .footer-container {
-    gap: 30px;
-  }
-
-  .footer-column h3 {
-    font-size: 20px;
-  }
+    /* 6. Fix the Button */
+    .product-card .order-btn {
+        font-size: 11px !important; /* Smaller text */
+        height: 28px; /* Thinner button */
+        padding: 0;
+        line-height: 28px; /* Centers text vertically */
+        margin-top: 5px;
+        width: 100%;
+    }
 }
+
+
 
 /* Extra small screens (400px-576px) - force 2 cards per row */
 @media (min-width: 400px) and (max-width: 576px) {

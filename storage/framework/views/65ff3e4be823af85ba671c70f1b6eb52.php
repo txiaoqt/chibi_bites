@@ -23,8 +23,7 @@
     <div class="center-div">
         <div class="left-div">
             <h1>What is Mochi?</h1><br>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt <br><br>
-			ut labore et dolore magna aliqua. Ut enim ad minim veniam,ut labore et dolore magna aliqua. Ut enim ad minim veniam,ut labore et dolore magna aliqua. Ut enim ad minim veniam, </p>
+            <p>Mochi is a traditional Japanese sweet made from glutinous rice that's pounded into a smooth, elastic paste and molded into various shapes. It's incredibly soft and chewy, often filled with sweet red bean paste, ice cream, or fruit, making it a delightful and unique treat loved worldwide for its delicate texture and versatility.</p>
         </div>
         <div class="right-div">
              <img src="<?php echo e(asset('images/whatismochi.jpg')); ?>" alt="Mochi" class="right-img">
@@ -57,7 +56,9 @@
         <section class="section section-4">
     <div class="center-div">
         <div class="left-div">
-            <img src="<?php echo e(asset('images/shopnow.png')); ?>" alt="Mochi" class="right-img">
+            <a href="<?php echo e(route('shop')); ?>">
+                <img src="<?php echo e(asset('images/shopnow.png')); ?>" alt="Shop Now" class="right-img">
+            </a>
         </div>
         <div class="right-div">
              <img src="<?php echo e(asset('images/storeloc.png')); ?>" alt="Mochi" class="right-img">

@@ -1,45 +1,43 @@
-@extends('layouts.app')
-
-@section('content')
+<?php $__env->startSection('content'); ?>
 <section>
 	<!-- Hidden input to pass authentication status -->
-	<input type="hidden" id="auth-status" value="{{ auth()->check() ? 'true' : 'false' }}">
+	<input type="hidden" id="auth-status" value="<?php echo e(auth()->check() ? 'true' : 'false'); ?>">
 
 	<div class="sectionshop">
 		<h1>Products</h1><br>
 	<div class="shop-container row">
-			@foreach($products as $product)
+			<?php $__currentLoopData = $products; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $product): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
 				<div class="product-column col-lg-3 col-md-4 col-sm-6 col-6">
-					<form action="{{ route('cart.add') }}" method="POST" class="order-form">
-						@csrf
-						<input type="hidden" name="product_id" value="{{ $product->id }}">
+					<form action="<?php echo e(route('cart.add')); ?>" method="POST" class="order-form">
+						<?php echo csrf_field(); ?>
+						<input type="hidden" name="product_id" value="<?php echo e($product->id); ?>">
 						<input type="hidden" name="quantity" value="1">
 						<div class="product-card">
-							<img src="{{ asset($product->image) }}" alt="{{ $product->name }}">
-							<h1>{{ $product->name }}</h1>
-							<p class="edu-school">₱{{ number_format($product->price, 2) }}</p>
+							<img src="<?php echo e(asset($product->image)); ?>" alt="<?php echo e($product->name); ?>">
+							<h1><?php echo e($product->name); ?></h1>
+							<p class="edu-school">₱<?php echo e(number_format($product->price, 2)); ?></p>
 							<button type="submit" class="order-btn">ORDER</button>
 						</div>
 					</form>
 				</div>
-			@endforeach
+			<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 		</div>
 	</div>
 
 	<!-- Success Modal -->
-	@if(session('cart_success'))
+	<?php if(session('cart_success')): ?>
 	<div id="successModal" class="success-modal">
 		<div class="success-modal-content">
-			<a href="{{ url()->current() }}" class="success-close-btn">&times;</a>
+			<a href="<?php echo e(url()->current()); ?>" class="success-close-btn">&times;</a>
 			<div class="success-modal-body">
 				<div class="success-icon">
 					✓
 				</div>
 				<h2 class="success-title">Success!</h2>
-				<p class="success-message">{{ session('cart_success') }}</p>
+				<p class="success-message"><?php echo e(session('cart_success')); ?></p>
 				<div class="success-buttons">
-					<a href="{{ url()->current() }}" class="success-btn success-btn-secondary">Add More</a>
-					<a href="{{ route('cart.index') }}" class="success-btn success-btn-primary">View Cart</a>
+					<a href="<?php echo e(url()->current()); ?>" class="success-btn success-btn-secondary">Add More</a>
+					<a href="<?php echo e(route('cart.index')); ?>" class="success-btn success-btn-primary">View Cart</a>
 				</div>
 			</div>
 		</div>
@@ -55,14 +53,14 @@
 			if (addMoreBtn) addMoreBtn.addEventListener('click', closeSuccessModal);
 		}
 	</script>
-	@endif
+	<?php endif; ?>
 
 	<!-- Modal -->
 	<div id="productModal" class="modal">
 		<div class="modal-content">
 			<button class="close-btn" onclick="closeModal()">&times;</button>
-			<form id="addToCartForm" action="{{ route('cart.add') }}" method="POST" class="order-form">
-				@csrf
+			<form id="addToCartForm" action="<?php echo e(route('cart.add')); ?>" method="POST" class="order-form">
+				<?php echo csrf_field(); ?>
 				<input type="hidden" name="product_id" id="modalProductId" value="">
 				<input type="hidden" name="quantity" id="modalQuantity" value="1">
 
@@ -96,7 +94,7 @@
 						e.preventDefault();
 						// Redirect to login with return URL
 						const currentUrl = encodeURIComponent(window.location.href);
-						window.location.href = '{{ route("login") }}?redirect=' + currentUrl;
+						window.location.href = '<?php echo e(route("login")); ?>?redirect=' + currentUrl;
 						return false;
 					}
 				});
@@ -104,4 +102,6 @@
 		});
 	</script>
 </section>
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.app', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH C:\Users\Christopher x Angel\Documents\chibi_bites\resources\views/shop.blade.php ENDPATH**/ ?>
