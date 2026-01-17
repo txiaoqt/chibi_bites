@@ -24,7 +24,7 @@
     ],
     "env": {
         "APP_ENV": "production",
-        "APP_DEBUG": "false",
+        "APP_DEBUG": "true",
         "APP_URL": "https://txiaoqt-chibibites-h79hlbzjz-toffs-projects-81b2ce10.vercel.app",
         "APP_KEY": "base64:ykyhN7YDZlQwC9K/UrvvlqgeSkxJ4ANAokjQFralNzk=",
 
