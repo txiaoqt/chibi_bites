@@ -4,14 +4,14 @@
     "functions": {
         "api/index.php": { "runtime": "vercel-php@0.7.2" }
     },
-    "routes": [{
-        "src": "/(.*)",
-        "dest": "/api/index.php"
-    }],
+    "routes": [
+        { "src": "/build/(.*)", "dest": "/public/build/$1" },
+        { "src": "/(.*)", "dest": "/public/index.php" }
+    ],
     "env": {
         "APP_ENV": "production",
         "APP_DEBUG": "true",
-        "APP_URL": "https://${VERCEL_URL}",
+        "APP_URL": "https://txiaoqt-chibibites-h79hlbzjz-toffs-projects-81b2ce10.vercel.app/",
         "APP_KEY": "base64:ykyhN7YDZlQwC9K/UrvvlqgeSkxJ4ANAokjQFralNzk=",
 
         "APP_CONFIG_CACHE": "/tmp/config.php",
